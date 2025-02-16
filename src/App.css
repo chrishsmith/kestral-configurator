@@ -7,22 +7,53 @@
 
 .App-header {
   background-color: #0494EC;
-  padding: 20px;
+  padding: 20px 0;
   display: flex;
   align-items: center;
-  justify-content: center;
   color: white;
 }
 
+.header-content {
+  display: flex;
+  align-items: center;
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
 .App-logo {
-  height: 60px;
-  margin-right: 20px;
+  height: 40px;
 }
 
 .App-header h1 {
   margin: 0;
   font-size: 2em;
   font-weight: 500;
+}
+
+.nav-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-menu a:hover {
+  border-bottom-color: white;
 }
 
 main {
@@ -71,5 +102,13 @@ main {
   .viewer-panel {
     flex: none;
     height: 600px;
+  }
+
+  .nav-menu {
+    position: relative;
+    left: auto;
+    transform: none;
+    margin-left: 40px;
+    gap: 24px;
   }
 } 

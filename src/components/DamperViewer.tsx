@@ -1,6 +1,6 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Text } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface DamperViewerProps {
@@ -19,6 +19,33 @@ interface DamperViewerProps {
   };
 }
 
+function createBladeShape() {
+  const shape = new THREE.Shape();
+  
+  // Starting from the top left of the blade profile
+  shape.moveTo(-3, 0.75);  // Top edge start
+  shape.lineTo(3, 0.75);   // Top edge
+  
+  // Right side profile
+  shape.lineTo(3, 0.5);    // Upper right corner
+  shape.lineTo(2.5, 0.25); // Right upper taper
+  shape.lineTo(2.5, -0.25);// Right middle straight
+  shape.lineTo(3, -0.5);   // Right lower taper
+  shape.lineTo(3, -0.75);  // Bottom right corner
+  
+  // Bottom edge
+  shape.lineTo(-3, -0.75); // Bottom edge
+  
+  // Left side profile (mirror of right side)
+  shape.lineTo(-3, -0.5);  // Left lower corner
+  shape.lineTo(-2.5, -0.25);// Left lower taper
+  shape.lineTo(-2.5, 0.25);// Left middle straight
+  shape.lineTo(-3, 0.5);   // Left upper taper
+  shape.lineTo(-3, 0.75);  // Back to start
+
+  return shape;
+}
+
 function DamperModel({ 
   width = 24, 
   height = 24, 
@@ -32,61 +59,55 @@ function DamperModel({
   accessories = {}
 }: DamperViewerProps) {
   
-  // Calculate number of blades
-  const bladeSpacing = 6; // 6" spacing
-  const frameOffset = 4; // 2" from each edge
-  const bladeCount = Math.max(2, Math.floor((height - frameOffset) / bladeSpacing));
+  // Calculate number of blades based on 6" spacing
+  const bladeSpacing = 6; // 6" spacing between blades
+  const frameThickness = 2; // 2" frame thickness
+  const availableHeight = height - (frameThickness * 2);
+  const bladeCount = Math.max(1, Math.floor(availableHeight / bladeSpacing));
   
-  // Calculate blade angle
-  const getBladeAngle = (index: number) => {
-    const baseAngle = type === 'Backdraft Damper' ? Math.PI / 6 : Math.PI / 4;
-    return bladeOrientation === 'opposed' && index % 2 === 1 ? -baseAngle : baseAngle;
+  // Create blade shape
+  const bladeShape = createBladeShape();
+  const extrudeSettings = {
+    steps: 1,
+    depth: width - (frameThickness * 2), // Blade spans between frame
+    bevelEnabled: false,
   };
 
   return (
-    <group>
+    <group position={[0, height/2, 0]}>
       {/* Frame */}
       <mesh castShadow receiveShadow>
         <boxGeometry args={[width, height, depth]} />
         <meshStandardMaterial 
-          color="#E8E8E8"
-          metalness={0.6}
-          roughness={0.4}
+          color="#BBBBBB"
+          metalness={0.4}
+          roughness={0.6}
+          transparent
+          opacity={0.95}
         />
       </mesh>
 
       {/* Blades */}
       {Array.from({ length: bladeCount }).map((_, index) => {
-        const yPos = (index * bladeSpacing) - (height / 2) + (bladeSpacing + 2);
+        const yPos = (index * bladeSpacing) - (height / 2) + frameThickness + (bladeSpacing / 2);
+        const angle = type === 'Backdraft Damper' ? Math.PI / 6 : Math.PI / 4;
+        const rotation = bladeOrientation === 'opposed' && index % 2 === 1 ? -angle : angle;
         
         return (
           <group 
             key={index}
-            position={[0, yPos, 0]}
-            rotation={[0, 0, getBladeAngle(index)]}
+            position={[0, yPos, -depth/2 + frameThickness]}
+            rotation={[Math.PI/2, 0, rotation]}
           >
-            {/* Main blade body */}
             <mesh castShadow receiveShadow>
-              <boxGeometry args={[width - 1.5, 0.375, depth - 1]} />
-              <meshStandardMaterial 
-                color="#E8E8E8"
-                metalness={0.7}
-                roughness={0.3}
+              <extrudeGeometry 
+                args={[bladeShape, extrudeSettings]} 
               />
-            </mesh>
-            
-            {/* Leading edge */}
-            <mesh 
-              castShadow 
-              receiveShadow 
-              position={[-(width - 1.5)/2, 0, 0]} 
-              rotation={[Math.PI/2, 0, 0]}
-            >
-              <cylinderGeometry args={[0.1875, 0.1875, depth - 1, 16]} />
               <meshStandardMaterial 
-                color="#E8E8E8"
-                metalness={0.7}
-                roughness={0.3}
+                color="#999999"
+                metalness={0.5}
+                roughness={0.5}
+                side={THREE.DoubleSide}
               />
             </mesh>
           </group>
@@ -98,7 +119,7 @@ function DamperModel({
         <group position={[width/2 + 0.5, 0, 0]}>
           <mesh castShadow receiveShadow>
             <boxGeometry args={[0.5, height - 2, 0.5]} />
-            <meshStandardMaterial color="#666666" metalness={0.8} />
+            <meshStandardMaterial color="#999999" metalness={0.5} roughness={0.5} />
           </mesh>
         </group>
       )}
@@ -113,14 +134,16 @@ export function DamperViewer(props: DamperViewerProps) {
       camera={{ position: [50, 30, 50], fov: 35 }}
       style={{ background: '#f0f0f0' }}
     >
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.8} />
       <directionalLight
-        intensity={0.8}
+        intensity={1.2}
         position={[20, 20, 20]}
         castShadow
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
       />
-      <pointLight intensity={0.4} position={[-20, 10, -20]} />
-      <pointLight intensity={0.3} position={[0, -15, 0]} />
+      <pointLight intensity={0.6} position={[-20, 10, -20]} />
+      <pointLight intensity={0.5} position={[0, -15, 0]} />
       
       <DamperModel {...props} />
       
@@ -132,7 +155,7 @@ export function DamperViewer(props: DamperViewerProps) {
         maxDistance={150}
       />
       
-      <gridHelper args={[100, 100]} position={[0, -10, 0]} />
+      <gridHelper args={[100, 20]} position={[0, 0, 0]} />
     </Canvas>
   );
 }

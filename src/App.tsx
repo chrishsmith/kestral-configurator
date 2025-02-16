@@ -36,8 +36,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Logo className="App-logo" />
-        <h1>Online Product Assisted Selection</h1>
+        <div className="header-content">
+          <Logo className="App-logo" />
+          <nav className="nav-menu">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#resources">Resources</a>
+            <a href="#support">Support</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
       </header>
       <main>
         <div className="content-layout">

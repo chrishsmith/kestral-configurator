@@ -826,7 +826,7 @@ export function ConfigurationForm({ config, onConfigChange }: ConfigurationFormP
   return (
     <div className="configuration-form">
       <div className="form-header">
-        <h2>Kestral Configurator</h2>
+        <h2>Online Product Assisted Selection</h2>
         <p className="subtitle">Complete each step to customize your damper specifications</p>
       </div>
 
