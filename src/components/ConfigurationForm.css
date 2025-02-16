@@ -1,0 +1,521 @@
+.configuration-form {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.form-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #eee;
+  background: linear-gradient(to right, #0297EB, #2547A1);
+  border-radius: 8px 8px 0 0;
+  color: white;
+}
+
+.form-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.form-header .subtitle {
+  margin: 4px 0 0;
+  opacity: 0.9;
+  font-size: 14px;
+}
+
+.form-sections {
+  padding: 24px;
+}
+
+.form-section {
+  margin-bottom: 32px;
+  padding: 24px;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.form-section h3 {
+  color: #2547A1;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #eee;
+}
+
+.step-indicator {
+  color: #0297EB;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.form-field {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.form-field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.select-wrapper,
+.input-wrapper {
+  position: relative;
+  margin-top: 4px;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+  font-size: 12px;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  background: white;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+select {
+  padding-right: 32px;
+}
+
+select:hover,
+input:hover {
+  border-color: #0297EB;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: #0297EB;
+  box-shadow: 0 0 0 3px rgba(2, 151, 235, 0.1);
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 320px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  margin-top: 8px;
+  z-index: 1000;
+  text-align: left;
+  display: block;
+}
+
+.tooltip-above {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.tooltip-left {
+  left: auto;
+  right: 0;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tooltip-above::before {
+  top: auto;
+  bottom: -6px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tooltip-left::before {
+  left: auto;
+  right: 20px;
+}
+
+.tooltip h4 {
+  margin: 0 0 8px;
+  color: #2547A1;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.tooltip h5 {
+  margin: 16px 0 8px;
+  color: #2547A1;
+  font-size: 14px;
+  font-weight: 600;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.tooltip p {
+  margin: 0 0 12px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.tooltip ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.tooltip li {
+  margin: 8px 0;
+  color: #333;
+  line-height: 1.4;
+}
+
+.tooltip li strong {
+  color: #2547A1;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.tooltip li div {
+  color: #666;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.checkbox-label {
+  position: relative;
+}
+
+.checkbox-label .option-description {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 280px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px;
+  margin-top: 8px;
+  z-index: 100;
+  font-size: 14px;
+  color: #666;
+  font-weight: normal;
+}
+
+.checkbox-label:hover .option-description {
+  display: block;
+}
+
+.checkbox-label .option-description.tooltip-above {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-sections {
+    padding: 16px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tooltip {
+    width: calc(100vw - 48px);
+    max-width: 320px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .tooltip::before {
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .tooltip-left {
+    left: 50%;
+    right: auto;
+  }
+
+  .numeric-input input {
+    width: 100%;
+  }
+}
+
+.dimensions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  border-top: 1px solid #eee;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.form-navigation button:last-child {
+  margin-left: auto;
+}
+
+.form-navigation button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-navigation button:not(.submit-button) {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.form-navigation button:not(.submit-button):hover {
+  background-color: #e5e5e5;
+}
+
+.submit-button {
+  background-color: #0297EB;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #0077c2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dimensions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-navigation {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-navigation button {
+    width: 100%;
+  }
+
+  .dimensions-section {
+    grid-template-columns: 1fr;
+  }
+
+  .accessories-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Accessories Section */
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 16px;
+  gap: 8px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.checkbox-label:hover {
+  border-color: #0297EB;
+}
+
+.checkbox-label.selected {
+  background: #f0f7ff;
+  border-color: #0297EB;
+}
+
+.checkbox-label span {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Dimensions Section */
+.dimensions-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  background: transparent;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.dimension-field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid #eee;
+  gap: 16px;
+}
+
+.dimension-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.dimension-hint {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.dimension-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.dimension-input input {
+  width: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: right;
+}
+
+.dimension-unit {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Add to App.css for the viewer panel padding */
+.viewer-panel {
+  margin: 24px 0;
+  height: calc(100% - 48px);
+}
+
+/* Update App.css config-panel class */
+.config-panel {
+  flex: 0 0 500px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 24px 0;
+  height: calc(100% - 48px);
+}
+
+.numeric-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.numeric-input input {
+  width: 120px;
+  padding: 8px 12px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  text-align: right;
+}
+
+.input-unit {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.option-description {
+  display: none;
+}
+
+.select-field {
+  margin-top: 8px;
+}
+
+.actuator-section {
+  margin-top: 8px;
+}
+
+.actuator-section select {
+  width: 100%;
+} 
