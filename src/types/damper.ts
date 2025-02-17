@@ -1,14 +1,16 @@
 export interface DamperConfig {
   // Basic Information
-  type: string;
-  application: string;
+  sequence: number;
+  tag: string;
+  type: 'control' | 'fire' | 'smoke' | 'industrial';
+  application: 'hvac' | 'volume-control' | 'isolation' | 'balancing' | 'throttling';
   
   // Dimensions
   width: number;
   height: number;
   depth: number;
   flangeConfiguration: 'none' | 'single' | 'double';
-  frameType: string;
+  frameType: 'hat-channel' | 'flat' | 'angle';
 
   // Performance
   systemPressure: number;
@@ -17,16 +19,16 @@ export interface DamperConfig {
   leakageClass: 'I' | 'II' | 'III';
 
   // Construction
-  frameMaterial: string;
-  bladeMaterial: 'galvanized' | 'stainless' | 'aluminum';
-  bladeType: string;
+  frameMaterial: 'galvanized' | 'stainless-304' | 'stainless-316' | 'aluminum';
+  bladeMaterial: 'galvanized' | 'stainless-304' | 'stainless-316' | 'aluminum';
+  bladeType: 'airfoil' | 'triple-v' | 'double-skin';
   sealMaterial: 'tpe-epdm' | 'silicone' | 'stainless';
   
   // Actuator Configuration
-  actuatorType: string;
-  actuatorVoltage?: '24V' | '120V' | '230V';
-  controlSignal: 'on-off' | 'floating' | 'proportional';
-  failPosition: 'open' | 'closed' | 'last';
+  actuatorType: 'electric' | 'pneumatic' | 'manual';
+  actuatorVoltage: '24V' | '120V' | '230V';
+  controlSignal: 'on-off' | 'floating' | 'proportional' | '4-20ma';
+  failPosition: 'last' | 'closed' | 'open';
 
   // Installation
   mountingOrientation: 'vertical' | 'horizontal';

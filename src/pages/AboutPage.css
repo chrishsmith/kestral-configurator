@@ -1,0 +1,254 @@
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 3rem 0;
+  background: linear-gradient(to right, rgba(2, 151, 235, 0.05), rgba(37, 71, 161, 0.05));
+  border-radius: 12px;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  color: #2547A1;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.hero-section .subtitle {
+  font-size: 1.25rem;
+  color: #5E5E5E;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+section h2 {
+  color: #2547A1;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.company-overview p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #5E5E5E;
+  margin-bottom: 2rem;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.highlight-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.highlight-card h3 {
+  color: #0297EB;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.highlight-card p {
+  color: #5E5E5E;
+  line-height: 1.5;
+}
+
+.mission-values {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+}
+
+.mission p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #5E5E5E;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.value-item {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.value-item h3 {
+  color: #0297EB;
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.value-item p {
+  color: #5E5E5E;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.expertise-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.expertise-card h3 {
+  color: #0297EB;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.expertise-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.expertise-card li {
+  padding-left: 1.5rem;
+  position: relative;
+  margin-bottom: 0.75rem;
+  color: #5E5E5E;
+  text-align: left;
+}
+
+.expertise-card li::before {
+  content: "•";
+  color: #1CC6D3;
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.team-member {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.team-member h3 {
+  color: #0297EB;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.team-member .role {
+  color: #2547A1;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.team-member .experience {
+  color: #5E5E5E;
+}
+
+.contact-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-section p {
+  font-size: 1.125rem;
+  color: #5E5E5E;
+  margin-bottom: 2rem;
+}
+
+.contact-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.contact-button {
+  padding: 0.875rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.contact-button.primary {
+  background: #0297EB;
+  color: white;
+}
+
+.contact-button.primary:hover {
+  background: #2547A1;
+  transform: translateY(-1px);
+}
+
+.contact-button.secondary {
+  background: #e3f2fd;
+  color: #2547A1;
+  border: 1px solid #0297EB;
+}
+
+.contact-button.secondary:hover {
+  background: #c5e4fc;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    padding: 1rem;
+  }
+
+  .hero-section {
+    padding: 2rem 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .mission-values {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-buttons {
+    flex-direction: column;
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+} 

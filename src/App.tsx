@@ -1,81 +1,25 @@
-import React, { useState } from 'react';
-import { ReactComponent as Logo } from './assets/logo.svg';
-import DamperViewer from './components/DamperViewer';
-import { ConfigurationForm } from './components/ConfigurationForm';
-import { DamperConfig } from './types/damper';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import SingleDamperPage from './pages/SingleDamperPage';
+import BulkOrderPage from './pages/BulkOrderPage';
+import AboutPage from './pages/AboutPage';
+import SupportPage from './pages/SupportPage';
+import ResourcesPage from './pages/ResourcesPage';
 import './App.css';
 
 function App() {
-  const [config, setConfig] = useState<DamperConfig>({
-    type: 'control',
-    application: 'hvac',
-    width: 24,
-    height: 24,
-    depth: 8,
-    flangeConfiguration: 'none',
-    frameType: 'hat-channel',
-    systemPressure: 1.0,
-    temperature: 70,
-    airVelocity: 1500,
-    leakageClass: 'II',
-    frameMaterial: 'galvanized',
-    bladeMaterial: 'galvanized',
-    bladeType: 'airfoil',
-    sealMaterial: 'tpe-epdm',
-    actuatorType: 'electric',
-    actuatorVoltage: '24V',
-    controlSignal: 'on-off',
-    failPosition: 'closed',
-    mountingOrientation: 'vertical',
-    ductworkConnection: 'rectangular',
-    installationLocation: 'indoor',
-    bladeOrientation: 'parallel',
-    accessories: []
-  });
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className="header-content">
-          <Logo className="App-logo" />
-          <nav className="nav-menu">
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#resources">Resources</a>
-            <a href="#support">Support</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
-          </nav>
-        </div>
-      </header>
-      <main>
-        <div className="content-layout">
-          <div className="config-panel">
-            <ConfigurationForm 
-              config={config}
-              onConfigChange={setConfig}
-            />
-          </div>
-          <div className="viewer-panel">
-            <DamperViewer
-              width={config.width}
-              height={config.height}
-              depth={config.depth}
-              type={config.type}
-              frameType={config.frameType as 'hat-channel' | 'flat' | 'angle'}
-              frameMaterial={config.frameMaterial}
-              bladeMaterial={config.bladeMaterial}
-              bladeOrientation={config.bladeOrientation}
-              linkageType="internal"
-              accessories={{
-                positionIndicator: config.accessories.includes('position-indicator'),
-                fusibleLink: config.accessories.includes('fusible-link')
-              }}
-            />
-          </div>
-        </div>
-      </main>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/configure" element={<SingleDamperPage />} />
+        <Route path="/bulk-order" element={<BulkOrderPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/support" element={<SupportPage />} />
+        <Route path="/resources" element={<ResourcesPage />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -29,6 +29,11 @@ interface FieldDescription {
 }
 
 const fieldDescriptions: Record<string, FieldDescription> = {
+  tag: {
+    title: "Tag/ID",
+    description: "A unique identifier for this damper",
+    inputType: 'text'
+  },
   type: {
     title: "Damper Type",
     description: "Select the primary type of damper needed for your application.",
@@ -726,6 +731,19 @@ export function ConfigurationForm({ config, onConfigChange }: ConfigurationFormP
       );
     }
 
+    if (fieldDesc.inputType === 'text') {
+      return (
+        <div className="text-input">
+          <input
+            type="text"
+            value={config[field as keyof DamperConfig] || ''}
+            onChange={(e) => handleChange(field as keyof DamperConfig, e.target.value)}
+            placeholder={`Enter ${fieldDesc.title}`}
+          />
+        </div>
+      );
+    }
+
     if (fieldDesc.inputType === 'number') {
       return (
         <div className="numeric-input">
@@ -831,7 +849,7 @@ export function ConfigurationForm({ config, onConfigChange }: ConfigurationFormP
       </div>
 
       <div className="form-sections">
-        {renderStep(1, "Basic Requirements", ['type', 'application'])}
+        {renderStep(1, "Basic Requirements", ['tag', 'type', 'application'])}
         {renderStep(2, "Dimensions & Basic Construction", ['dimensions', 'frameType', 'frameMaterial'])}
         {renderStep(3, "Performance Requirements", ['systemPressure', 'temperature', 'airVelocity', 'leakageClass'])}
         {renderStep(4, "Blade Configuration", ['bladeMaterial', 'bladeType', 'sealMaterial'])}
